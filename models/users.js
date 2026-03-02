@@ -21,8 +21,8 @@ async function findUser(username, password) {
 
 
 async function addUser(username, password) {
-    let result =await db.run("INSERT INTO Users (username, password) VALUES (?, ?)",
-                            [username, password]);
+    let result =await db.run("INSERT INTO Users (username, password, level) VALUES (?, ?, ?)",
+                            [username, password, "member"]);
     return result;
 }
 

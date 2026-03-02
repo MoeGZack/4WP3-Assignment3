@@ -19,6 +19,17 @@ router.get("/signup", async function(req, res)
   res.render("signup", req.TPL);
 });
 
+router.post("/signup", async function(req, res)
+{
+  // add the user to the database
+  await UsersModel.addUser(req.body.username, req.body.password);
+  req.session.login_error = "Account created! Please login with your new account.";
+  res.redirect("/login");
+  
+  
+}
+);
+
 // Attempts to login a user
 // - The action for the form submit on the login page.
 router.post("/attemptlogin", async function(req, res){
@@ -52,6 +63,13 @@ router.get("/logout", async function(req, res)
   delete(req.session.username);
   delete(req.session.level);
   res.redirect("/home");
+});
+
+router.get("/signup", async function(req, res)
+{
+  req.TPL.signup_error = req.session.signup_error;
+  req.session.signup_error = "";
+  res.render("signup", req.TPL);
 });
 
 module.exports = router;

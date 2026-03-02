@@ -7,12 +7,12 @@
     <div class="card">
       <h2>Sign up</h2>
       <p>Enter a username and password below to sign Up!.</p>
-      <p style="color:red;">{{ login_error }}</p>
+      <p style="color:red;">{{ signup_error }}</p>
       <form action="/login/signup" method="post">
         <label for="username">Username:</label>
-        <input type="text" name="username"> <br /> <br />
+        <input type="text" name="username" maxlength="6"> <br /> <br />
         <label for="password">Password:</label>
-        <input type="text" name="password"> <br /> <br />
+        <input type="text" name="password" maxlength="6"> <br /> <br />
         <input type="submit" value="signup">
       </form> <br />
     </div>
