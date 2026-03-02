@@ -20,4 +20,11 @@ async function findUser(username, password) {
 }
 
 
-module.exports = {findUser, dbconn};
+async function addUser(username, password) {
+    let result =await db.run("INSERT INTO Users (username, password) VALUES (?, ?)",
+                            [username, password]);
+    return result;
+}
+
+
+module.exports = {findUser, addUser, dbconn};
