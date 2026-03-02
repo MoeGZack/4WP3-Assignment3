@@ -13,9 +13,9 @@ async function dbconn() {
 }
 
 
-async function findUser(username, password,level) {
-  let result = await db.get("SELECT * FROM Users WHERE username=? AND password=? and level=?",
-                            [username, password, level]);
+async function findUser(username, password) {
+  let result = await db.get("SELECT * FROM Users WHERE username=? AND password=?",
+                            [username, password]);
   return result;
 }
 

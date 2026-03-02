@@ -22,11 +22,12 @@ const user = await UsersModel.findUser(req.body.username, req.body.password);
   if (user){
     req.session.username = user.username;
     req.session.level = user.level;
+    
 
-    if (user.level == "editors"){
-      res.redirect("/editor");
+    if (user.level == "editor"){
+      res.redirect("/editors");
     }
-    else {
+    if (user.level == "member") {
       res.redirect("/members");
     }
   }
