@@ -14,6 +14,11 @@ router.get("/", async function(req, res)
   res.render("login", req.TPL);
 });
 
+router.get("/signup", async function(req, res)
+{
+  res.render("signup", req.TPL);
+});
+
 // Attempts to login a user
 // - The action for the form submit on the login page.
 router.post("/attemptlogin", async function(req, res){
