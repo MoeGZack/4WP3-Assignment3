@@ -13,9 +13,8 @@ async function dbconn() {
 }
 
 
-async function findUser(username, password) {
-  let result = await db.get("SELECT * FROM Users WHERE username=? AND password=?",
-                            [username, password]);
+async function findUser(username) {
+  let result = await db.get("SELECT * FROM Users WHERE username=?", [username]);
   return result;
 }
 

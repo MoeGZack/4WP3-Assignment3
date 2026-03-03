@@ -48,11 +48,11 @@ try {
 // - The action for the form submit on the login page.
 router.post("/attemptlogin", async function(req, res){
 const user = await UsersModel.findUser(req.body.username);
+const passwordMatch = await bcrypt.compare(req.body.password, user.password);
   // is the username and password OK?
   if (user){
     req.session.username = user.username;
     req.session.level = user.level;
-    const passwordMatch = await bcrypt.compare(req.body.password, user.password);
 
     if (!passwordMatch) {
       req.session.login_error = "Invalid username and/or password!";

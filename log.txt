@@ -96,3 +96,11 @@ Tue Mar 03 2026 00:05:32 GMT-0500 (Eastern Standard Time),/login/signup,::1,{},{
 Tue Mar 03 2026 00:05:32 GMT-0500 (Eastern Standard Time),/login,::1,{},{}
 Tue Mar 03 2026 00:05:40 GMT-0500 (Eastern Standard Time),/login/attemptlogin,::1,{},{"username":"test1","password":"test2"}
 Tue Mar 03 2026 00:05:40 GMT-0500 (Eastern Standard Time),/login,::1,{},{}
+Tue Mar 03 2026 00:08:46 GMT-0500 (Eastern Standard Time),/,::1,{},{}
+Tue Mar 03 2026 00:08:46 GMT-0500 (Eastern Standard Time),/home,::1,{},{}
+Tue Mar 03 2026 00:08:48 GMT-0500 (Eastern Standard Time),/login,::1,{},{}
+Tue Mar 03 2026 00:08:49 GMT-0500 (Eastern Standard Time),/login/signup,::1,{},{}
+Tue Mar 03 2026 00:08:52 GMT-0500 (Eastern Standard Time),/login/signup,::1,{},{"username":"test","password":"test"}
+Tue Mar 03 2026 00:08:52 GMT-0500 (Eastern Standard Time),/login,::1,{},{}
+Tue Mar 03 2026 00:08:55 GMT-0500 (Eastern Standard Time),/login/attemptlogin,::1,{},{"username":"test","password":"test"}
+Tue Mar 03 2026 00:08:55 GMT-0500 (Eastern Standard Time),/members,::1,{},{}
