@@ -4,6 +4,9 @@ const ArticlesModel = require('../models/articles.js')
 const UsersModel = require('../models/users.js')
 const bcrypt= require('bcrypt')
 const saltRounds = 10;
+
+
+
 // Displays the login page
 router.get("/", async function(req, res)
 {
@@ -15,10 +18,7 @@ router.get("/", async function(req, res)
   res.render("login", req.TPL);
 });
 
-router.get("/signup", async function(req, res)
-{
-  res.render("signup", req.TPL);
-});
+
 
 bcrypt.genSalt(saltRounds, function(err) {
   if (err) {
@@ -47,31 +47,28 @@ try {
 // Attempts to login a user
 // - The action for the form submit on the login page.
 router.post("/attemptlogin", async function(req, res){
-const user = await UsersModel.findUser(req.body.username);
-const passwordMatch = await bcrypt.compare(req.body.password, user.password);
-  // is the username and password OK?
-  if (user){
-    req.session.username = user.username;
-    req.session.level = user.level;
 
+const user = await UsersModel.findUser(req.body.username);
+
+
+  if (!user) {
+    req.session.login_error = "Invalid username and/or password!";
+    return res.redirect("/login");
+  }
+
+  const passwordMatch = await bcrypt.compare(req.body.password, user.password);
     if (!passwordMatch) {
       req.session.login_error = "Invalid username and/or password!";
       return res.redirect("/login");
     }
     
-    if (user.level == "editor"){
-      res.redirect("/editors");
-    }
-    if (user.level == "member") {
-      res.redirect("/members");
-    }
-  }
-  else {
+    
     // if we have an error, reload the login page with an error
-    req.session.login_error = "Invalid username and/or password!";
-    res.redirect("/login");
-  }
+   req.session.username = user.username;
+  req.session.level = user.level;
 
+  if (user.level === "editor") return res.redirect("/editors");
+  return res.redirect("/members");
 });
 
 // Logout a user
@@ -90,5 +87,7 @@ router.get("/signup", async function(req, res)
   req.session.signup_error = "";
   res.render("signup", req.TPL);
 });
+
+
 
 module.exports = router;

@@ -14,28 +14,27 @@ app.set('views', __dirname + '/views');
 app.use(express.urlencoded({extended: false}));
 
 const myLogger = function(req,res,next) {
-        const safedata={
-                username: req.session.username,
-                password: req.session.password
-        }
-        if (safedata.username) safedata.username = "REDACTED";
-        if (safedata.password) safedata.password = "REDACTED";
-
+        let safebody = req.body || {};
+        if (safebody.password) { safebody.password = "[REDACTED]"; }
+                        
+                
+        
         const logString = 
         new Date()+","+
         req.path +","+
         req.ip +","+
-        JSON.stringify(req.query) +","+
-        JSON.stringify(safedata)+"\n";
+        JSON.stringify(req.query|| {}) +","+
+        JSON.stringify(safebody)+"\n";
 
         fs.appendFile("log.txt", logString, function(err) {
-                if (err) {
+                if (err) 
                         console.log("Error writing to log file: " + err);
-                }
+                
         });
 
         next();
-}
+};
+
 app.use(myLogger);
 
 // Use the session middleware
