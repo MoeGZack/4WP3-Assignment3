@@ -10,9 +10,9 @@
       <p style="color:red;">{{ signup_error }}</p>
       <form action="/login/signup" method="post">
         <label for="username">Username:</label>
-        <input type="text" name="username" maxlength="6"> <br /> <br />
+        <input type="text" name="username" maxlength="6" required> <br /> <br />
         <label for="password">Password:</label>
-        <input type="text" name="password" maxlength="6"> <br /> <br />
+        <input type="text" name="password" maxlength="6" required> <br /> <br />
         <input type="submit" value="signup">
       </form> <br />
     </div>

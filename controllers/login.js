@@ -26,22 +26,22 @@ bcrypt.genSalt(saltRounds, function(err, salt) {
   }
 });
 
-router.post("/signup", async function(req, res)
-{
-  // add the user to the database
-  await UsersModel.addUser(req.body.username, req.body.password);
+router.post("/signup", async function(req, res){
+
+try {
+  const {username, password} = req.body;
+  const hash = await bcrypt.hash(password, saltRounds);
+   // add the user to the database
+  await UsersModel.addUser(username, hash);
   req.session.login_error = "Account created! Please login with your new account.";
   res.redirect("/login");
-
-  bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
-    if (err) {
-      console.error(err);
-      return;
-    }
-  console.log('hash: ' + hash);
+} catch (err) {
+  console.error(err);
+  req.session.signup_error = "Error creating account. Please try again.";
+  res.redirect("/signup");
 }
-);
 });
+
 
 
 // Attempts to login a user
