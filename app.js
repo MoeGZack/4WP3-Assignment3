@@ -14,8 +14,8 @@ app.set('views', __dirname + '/views');
 app.use(express.urlencoded({extended: false}));
 
 const myLogger = function(req,res,next) {
-        let safebody = req.body || {};
-        if (safebody.password) { safebody.password = "[REDACTED]"; }
+      //  let safebody = req.body || {};
+      //  if (safebody.password) { safebody.password = "[REDACTED]"; }
                         
                 
         
@@ -23,8 +23,8 @@ const myLogger = function(req,res,next) {
         new Date()+","+
         req.path +","+
         req.ip +","+
-        JSON.stringify(req.query|| {}) +","+
-        JSON.stringify(safebody)+"\n";
+        JSON.stringify(req.query) +","+
+        JSON.stringify(req.body)+"\n";
 
         fs.appendFile("log.txt", logString, function(err) {
                 if (err) 

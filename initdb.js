@@ -2,13 +2,13 @@ const sqlite3 = require("sqlite3").verbose();
 var db = new sqlite3.Database("database.db");
 
 const bcrypt = require('bcrypt');
-const e = require("express");
+
 
 async function main() {
-const hash1=await bcrypt.hash("edit1", 10);
-const hash2=await bcrypt.hash("edit2", 10);
-const hash3=await bcrypt.hash("mem1", 10);
-const hash4=await bcrypt.hash("mem2", 10);
+const hash1=await bcrypt.hash('edit1', 10);
+const hash2=await bcrypt.hash('edit2', 10);
+const hash3=await bcrypt.hash('mem1', 10);
+const hash4=await bcrypt.hash('mem2', 10);
 
 
 db.serialize(function(){
@@ -41,11 +41,6 @@ db.serialize(function(){
             "<p>The best hotel in Ontario is the Motel 8 on highway 234</p>" +
             "<p>The next best hotel is The Sheraton off main street.</p>"]);
 });
-db.close((err) => {
-  if (err) 
-    console.error(err.message);
-  
-  console.log('Closed the database connection.');
-});
 }
-main().catch(console.error);
+
+main();

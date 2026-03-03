@@ -15,6 +15,7 @@ async function dbconn() {
 
 async function findUser(username) {
   let result = await db.get("SELECT * FROM Users WHERE username=?", [username]);
+  console.log(result);
   return result;
 }
 
