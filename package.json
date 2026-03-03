@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4",
+    "bcrypt": "^5.1.0",
     "express-mustache": "^1.0.4",
     "express-session": "^1.15.6",
     "mustache-express": "^1.2.8",

@@ -2,7 +2,8 @@ const express = require('express');
 var router = express.Router()
 const ArticlesModel = require('../models/articles.js')
 const UsersModel = require('../models/users.js')
-
+const bcrypt= require('bcrypt')
+const saltRounds = 10;
 // Displays the login page
 router.get("/", async function(req, res)
 {
@@ -19,16 +20,29 @@ router.get("/signup", async function(req, res)
   res.render("signup", req.TPL);
 });
 
+bcrypt.genSalt(saltRounds, function(err, salt) {
+  if (err) {
+    console.error(err);
+  }
+});
+
 router.post("/signup", async function(req, res)
 {
   // add the user to the database
   await UsersModel.addUser(req.body.username, req.body.password);
   req.session.login_error = "Account created! Please login with your new account.";
   res.redirect("/login");
-  
-  
+
+  bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+    if (err) {
+      console.error(err);
+      return;
+    }
+  console.log('hash: ' + hash);
 }
 );
+});
+
 
 // Attempts to login a user
 // - The action for the form submit on the login page.
