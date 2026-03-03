@@ -57,8 +57,7 @@ const user = await UsersModel.findUser(req.body.username);
   }
 
   const passwordMatch = await bcrypt.compare(req.body.password, user.password);
-  console.log("Password match: " + passwordMatch);
-  console.log("password: " + req.body.password);
+  
     if (!passwordMatch) {
       req.session.login_error = "Invalid username and/or password!";
       return res.redirect("/login");
