@@ -14,12 +14,19 @@ app.set('views', __dirname + '/views');
 app.use(express.urlencoded({extended: false}));
 
 const myLogger = function(req,res,next) {
+        const safedata={
+                username: req.session.username,
+                password: req.session.password
+        }
+        if (safedata.username) safedata.username = "REDACTED";
+        if (safedata.password) safedata.password = "REDACTED";
+
         const logString = 
         new Date()+","+
         req.path +","+
         req.ip +","+
         JSON.stringify(req.query) +","+
-        JSON.stringify(req.body)+"\n";
+        JSON.stringify(safedata)+"\n";
 
         fs.appendFile("log.txt", logString, function(err) {
                 if (err) {

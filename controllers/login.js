@@ -20,7 +20,7 @@ router.get("/signup", async function(req, res)
   res.render("signup", req.TPL);
 });
 
-bcrypt.genSalt(saltRounds, function(err, salt) {
+bcrypt.genSalt(saltRounds, function(err) {
   if (err) {
     console.error(err);
   }
