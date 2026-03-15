@@ -1,1 +1,7 @@
+One issue i ran into while working on this assignment was that my signup page would not load. Upon investigation I realized I did not 
+create the signup route (Commit:47a9a2b90d7a73bb5a061d1dcba12bc0836adf48). I realized this based off the console errors, once I added my Route it resolved the issue
 
+Another issue I had was with bcrypt password hashing. In commit 6b608a4d948bc5494b293dfb6939fe50c60e74f5, the password hash was not being stored correctly 
+in the database because the variable containing the hash was availabel when the query was executed. 
+After adjusting where the hash was declared and restructuring the code (commit 674ad39811d6f63b1a431a7268910e07410236d2), 
+the login system worked correctly with hashed passwords. This helped me better understand variable execution and how bcrypt works with authentication.
