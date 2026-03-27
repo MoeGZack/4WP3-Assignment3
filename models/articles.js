@@ -28,5 +28,15 @@ async function createArticle(article,username)
          [article.title, username, article.content]);
 }
 
+async function deleteArticle(title) {
+  await db.run("DELETE FROM Articles WHERE title=?", [title]);
+}
+
+async function deleteArticlesByUser(username) {
+  await db.run("DELETE FROM Articles WHERE username=?", [username]);
+}
+
 module.exports = {getAllArticles
-                 ,createArticle};
+                 ,createArticle
+                 ,deleteArticle
+                 ,deleteArticlesByUser};

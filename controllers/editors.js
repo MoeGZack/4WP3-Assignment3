@@ -13,7 +13,7 @@ router.get("/", async function(req, res)
   req.TPL.articles = await ArticlesModel.getAllArticles();
   res.render("editors", req.TPL);
   
-  res.render("editors", req.TPL);
+ 
 });
 
 router.get("/deletearticle/:title", async function(req, res) {
@@ -23,7 +23,7 @@ res.redirect("/editors");
 });
 
 router.get("/deleteuser/:username", async function(req, res) {
-  await ArticlesModel.deleteArticlesByAuthor(req.params.username);
+  await ArticlesModel.deleteArticlesByUser(req.params.username);
 await UsersModel.deleteUser(req.params.username);
 res.redirect("/editors");
 });
