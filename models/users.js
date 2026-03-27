@@ -26,5 +26,13 @@ async function addUser(username, password) {
     return result;
 }
 
+async function getAllUsers() {
+  return await db.all("SELECT * FROM Users");
+}
 
-module.exports = {findUser, addUser, dbconn};
+async function deleteUser(username) {
+ await db.run("DELETE FROM Users WHERE username=?", [username]);
+  
+}
+
+module.exports = {findUser, addUser, dbconn, getAllUsers, deleteUser};

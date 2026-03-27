@@ -32,7 +32,7 @@ const {username, password} = req.body;
 
 if (!username || !password || username.length<6 || password.length<6) {
   req.session.signup_error = "Username and password are required and must be at least 6 characters long!";
-  return res.redirect("login/signup");
+  return res.redirect("/login/signup");
 }
 
  
@@ -44,7 +44,7 @@ if (!username || !password || username.length<6 || password.length<6) {
   res.redirect("/login/signup");
 
   req.session.signup_error = "Error creating account. Please try again.";
-  res.redirect("/signup");
+  
 
 });
 
