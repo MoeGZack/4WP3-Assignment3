@@ -28,18 +28,24 @@ bcrypt.genSalt(saltRounds, function(err) {
 
 router.post("/signup", async function(req, res){
 
-try {
-  const {username, password} = req.body;
+const {username, password} = req.body;
+
+if (!username || !password || username.length<6 || password.length<6) {
+  req.session.signup_error = "Username and password are required and must be at least 6 characters long!";
+  return res.redirect("login/signup");
+}
+
+ 
   const hash = await bcrypt.hash(password, saltRounds);
    // add the user to the database
   await UsersModel.addUser(username, hash);
-  req.session.login_error = "Account created! Please login with your new account.";
-  res.redirect("/login");
-} catch (err) {
-  console.error(err);
+  req.session.signup_success = "Account created! Please login with your new account.";
+  req.session.signup_error = "";
+  res.redirect("/login/signup");
+
   req.session.signup_error = "Error creating account. Please try again.";
   res.redirect("/signup");
-}
+
 });
 
 
