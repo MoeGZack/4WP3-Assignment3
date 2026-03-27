@@ -91,6 +91,8 @@ router.get("/logout", async function(req, res)
 router.get("/signup", async function(req, res)
 {
   req.TPL.signup_error = req.session.signup_error;
+  req.TPL.signup_success = req.session.signup_success;
+  req.session.signup_success = "";
   req.session.signup_error = "";
   res.render("signup", req.TPL);
 });
